@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->string('pass');
-            $table->string('email');
-            $table->unsignedBigInteger('notificationID');
-            $table->foreign('notificationID')->references('id')->on('notifications');
-
+            $table->string('city');
+            $table->string('governorate');
+            $table->string('street');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users');
         });
-
     }
 
     /**
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('addresses');
     }
 };

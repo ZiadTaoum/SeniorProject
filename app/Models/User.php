@@ -3,10 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Role;
+use App\Models\Review;
+use App\Models\Address;
+use App\Models\LostItem;
+use App\Models\FoundItem;
+use App\Models\Notification;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -21,6 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone_number',
+        'role_id'
     ];
 
     /**
@@ -45,5 +53,28 @@ class User extends Authenticatable
 
     public function UsersReviews(){
         return $this->hasMany(Review::class, 'user_id');
+    }
+
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+    public function addresses(){
+        return $this->hasMany(Address::class);
+    }
+    public function notifications(){
+        return $this->hasMany(Notification::class);
+    }
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
+    public function lostItems(){
+        return $this->hasMany(LostItem::class);
+    }
+    public function foundItems(){
+        return $this->hasMany(FoundItem::class);
+    }
+
+    public function isAdmin(){
+        return $this->role->name == 'admin';
     }
 }

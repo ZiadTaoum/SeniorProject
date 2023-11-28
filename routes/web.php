@@ -30,10 +30,10 @@ Route::post('/Login',[UserController::class, 'login']);
 
 //Routes for Reviews
 
-Route::post('/create-review',[ReviewController::class,'createReview']);
-Route::get('/edit-review/{review}',[ReviewController::class,'ShowEditScreen']);
-Route::put('/edit-review/{review}',[ReviewController::class,'UpdatedReview']);
-Route::delete('/delete-review/{review}',[ReviewController::class,'DeleteReview']);
+// Route::post('/create-review',[ReviewController::class,'createReview']);
+// Route::get('/edit-review/{review}',[ReviewController::class,'ShowEditScreen']);
+// Route::put('/edit-review/{review}',[ReviewController::class,'UpdatedReview']);
+// Route::delete('/delete-review/{review}',[ReviewController::class,'DeleteReview']);
 
 //Routes for Admin
 

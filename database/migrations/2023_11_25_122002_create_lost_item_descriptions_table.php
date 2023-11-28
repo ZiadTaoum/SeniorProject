@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('lost_item_descriptions', function (Blueprint $table) {
             $table->id();
             $table->string('category');
-            $table->date('dateLost');
-            $table->string('Color');
-            $table->string('Model');
-            $table->unsignedBigInteger('lostitemID');
+            $table->date('date_lost');
+            $table->string('color');
+            $table->string('model');
+            $table->unsignedBigInteger('lost_item_id');
             $table->timestamps();
 
-            $table->foreign('founditemID')->references('id')->on('found_items');        });
+            $table->foreign('lost_item_id')->references('id')->on('lost_items');        
+        });
     }
 
     /**

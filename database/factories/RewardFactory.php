@@ -17,7 +17,7 @@ class RewardFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'reward_description' => $this->faker->text
         ];
     }
 }

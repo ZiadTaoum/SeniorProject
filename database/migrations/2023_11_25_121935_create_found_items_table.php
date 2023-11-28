@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('found_items', function (Blueprint $table) {
             $table->id();
-            $table->string('itemName');
+            $table->string('item_name');
             $table->string('status');
-            $table->unsignedBigInteger('imageID');
-            $table->unsignedBigInteger('userID');
-            $table->unsignedBigInteger('AddressID');
-            $table->unsignedBigInteger('categoryID');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('image_id'); 
+            $table->unsignedBigInteger('address_id'); 
+            $table->unsignedBigInteger('category_id');
             $table->timestamps();
 
-            $table->foreign('imageID')->references('id')->on('images');
-            $table->foreign('userID')->references('id')->on('users');
-            $table->foreign('AddressID')->references('id')->on('addresses');
-            $table->foreign('categoryID')->references('id')->on('categories');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('image_id')->references('id')->on('images');
+            $table->foreign('address_id')->references('id')->on('addresses');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

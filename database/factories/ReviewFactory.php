@@ -6,9 +6,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\address>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Review>
  */
-class AddressFactory extends Factory
+class ReviewFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +18,7 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'city' => $this->faker->city,
-            'governorate' => $this->faker->state, 
-            'street' => $this->faker->streetName, 
+            'review_content' => $this->faker->text, 
             'user_id' => function(){
                 return User::all()->random();
             }
