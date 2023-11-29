@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('category');
             $table->date('dateFound');
-            $table->string('Color');
-            $table->string('Model');
-            $table->unsignedBigInteger('founditemID');
+            $table->string('color');
+            $table->string('model');
+            $table->unsignedBigInteger('found_item_id');
             $table->timestamps();
 
-            $table->foreign('founditemID')->references('id')->on('found_items');
+            $table->foreign('found_item_id')->references('id')->on('found_items');
         });
     }
 

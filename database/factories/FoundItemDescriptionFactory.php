@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\FoundItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,13 @@ class FoundItemDescriptionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'category' => $this->faker->word,
+            'dateFound' => $this->faker->date,
+            'color' => $this->faker->colorName,
+            'model' => $this->faker->year($max='now'),
+            'found_item_id' => function(){
+                return FoundItem::all()->random();
+            }
         ];
     }
 }

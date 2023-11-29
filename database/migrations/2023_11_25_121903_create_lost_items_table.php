@@ -10,22 +10,22 @@ return new class extends Migration
     {
         Schema::create('lost_items', function (Blueprint $table) {
             $table->id();
-            $table->string('itemName');
+            $table->string('item_name');
             $table->string('status');
-            $table->unsignedBigInteger('userID');
-            $table->unsignedBigInteger('imageID'); 
-            $table->unsignedBigInteger('AddressID'); 
-            $table->unsignedBigInteger('categoryID');
-            $table->unsignedBigInteger('reviewID');
-            $table->unsignedBigInteger('rewardID');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('image_id'); 
+            $table->unsignedBigInteger('address_id'); 
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('review_id');
+            $table->unsignedBigInteger('reward_id');
             $table->timestamps();
 
-            $table->foreign('userID')->references('id')->on('users');
-            $table->foreign('imageID')->references('id')->on('images');
-            $table->foreign('AddressID')->references('id')->on('addresses');
-            $table->foreign('categoryID')->references('id')->on('categories');
-            $table->foreign('reviewID')->references('id')->on('reviews');
-            $table->foreign('rewardID')->references('id')->on('rewards');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('image_id')->references('id')->on('images');
+            $table->foreign('address_id')->references('id')->on('addresses');
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('review_id')->references('id')->on('reviews');
+            $table->foreign('reward_id')->references('id')->on('rewards');
         });
     }
 

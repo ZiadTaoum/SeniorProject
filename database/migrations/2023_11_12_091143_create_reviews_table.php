@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->longText('ReviewContent');
+            $table->longText('review_content');
             $table->unsignedBigInteger('user_id');    
             $table->foreign('user_id')->references('id')->on('users');
 
