@@ -17,6 +17,7 @@ use App\Models\Notification;
 use Illuminate\Database\Seeder;
 use App\Models\LostItemDescription;
 use App\Models\FoundItemDescription;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,28 +30,40 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin'
         ]);
         Role::factory()->create([
-            'name' => 'client'
+            'name' => 'user'
         ]);
-        Image::factory(20)->create();
-        Category::factory(50)->create();
-        Reward::factory(50)->create();
-        User::factory(100)->create();
-        Address::factory(100)->create();
-        Notification::factory(100)->create();
-        Review::factory(50)->create();
+        
+        User::factory()->create(['role_id' => 1]); // Admin role
+        User::factory()->create(['role_id' => 2]); // User role
 
-        for ($i = 0; $i < 50; $i++) {
+        Image::factory(10)->create();
+        Category::factory(10)->create();
+        Reward::factory(10)->create();
+        User::factory(10)->create();
+        Address::factory(10)->create();
+        Notification::factory(10)->create();
+        Review::factory(10)->create();
+
+        for ($i = 0; $i < 10; $i++) {
             $lost_item = LostItem::factory()->create();
             LostItemDescription::factory()->create([
                 'lost_item_id' => $lost_item->id
             ]);
         }
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $found_item = FoundItem::factory()->create();
             FoundItemDescription::factory()->create([
                 'found_item_id' => $found_item->id
             ]);
         }
+    
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password'),
+            'is_admin' => true, // Assuming you have an 'is_admin' column in your users table
+        ]);
+    
     }
 }

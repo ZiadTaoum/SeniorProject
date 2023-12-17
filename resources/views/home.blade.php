@@ -1,74 +1,57 @@
+@extends('layout')
+
+@section('title', 'Home')
+
+@section('content')
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+
 <body>
 
-    @auth
-    <p>you are logged in</p>
-    <form action="/Logout" method="POST">
-        @csrf
-        <button>Log Out</button>
-    </form>
+</head>
+<div class="reminder">
+    <p>
+        Before you start, we recommend visiting our <a href="{{ url('/about') }}">About</a> page to learn more about our platform and safety guidelines.
+    </p>
+</div>
 
-    <div style="border: 10px solid black;">
-        <h2>Leave a Review</h2>
-        <form action="/create-review" method="POST">
-            @csrf
-            
-            <textarea name="ReviewContent" placeholder="enter your review"></textarea>
-            <button>save review</button>
-        </form>
-    </div>
+    <div class="Left_part">
+        <h2>FOUND!</h2>
+        <h4>Your items are lost, but not forgotten</h4>
+        <p>Searching for your missing items made easier today</p>
 
-    <div style="border: 10px solid black;">
-        <h2>All Posts</h2>
-        @foreach ($reviews as $review)
-            <div style="background-color: grey; padding:10px; margin:10px;">
-                <h3>{{$review['ReviewContent']}}</h3>
-                <p><a href="/edit-review/{{$review->id}}">Edit</a></p>
-                <form action="/delete-review/{{$review->id}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button>Delete</button>
-                </form>
-            </div>
-        @endforeach
-    </div>
+        <button class="button" onclick="window.location.href='{{ url('/report') }}'">Start Your Search</button>
 
-    @else
-
-    <div style="border: 10px solid black;">
-        <h2>Register</h2>
-        <form action="/Register" method="POST">
-            @csrf
-            <input type="text" name="name" placeholder="name">
-            <input type="email" name="email" placeholder="email">
-            <input type="password" name="password" placeholder="password">
-            <button>Register</button>
-        </form>
+        <div class="img">
+            <img src="{{ asset('images\aaaa.png') }}" alt="LAF-logo" width=200px height=200px >    
         </div>
+    </div>
 
-        <form action="/admin" >
-            @csrf
-            <button>Admin?</button>
-        </form>
+    <div class="middle_part">
+        <h4>What’s better than a reunion with your stuff? </h4>
+        <p>
+            Nothing, so what are you waiting for, start your searching journey, and we will be there for you, giving you directions to reach your goal.
+        </p>
 
-        <div style="border: 10px solid black;">
-            <h2>Login</h2>
-            <form action="/Login" method="POST">
-                @csrf
-                <input type="text" name="loginName" placeholder="name">
-                <input type="password" name="loginPassword" placeholder="password">
-                <button>Log in</button>
-            </form>
-            </div>
+        <img src="{{ asset('images\aaaa.png') }}" alt="LAF-logo" width=200px height=200px >    
 
-    @endauth
+        <button onclick="window.location.href='{{ url('/founditem/create') }}'">Report a Found Item</button>
 
-   
+        
+    </div>
+
+    <div class="last_part">
+        <h3>What once was lost, now is found </h3>
+        <p>
+            But it’s also important to tell us more about your experience here, so we recommend leaving feedback concerning your adventure!
+        </p>
+
+        <button onclick="window.location.href='{{ url('/reviews/create') }}'">Leave A Review</button>
+    </div>
 </body>
 </html>
+
+@endsection
+

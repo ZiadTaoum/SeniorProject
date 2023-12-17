@@ -11,11 +11,16 @@ class Image extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['image_url'];
+    protected $table = 'images';
 
 
     public function lostItems(){
         return $this->hasMany(LostItem::class);
+    }
+
+    public function lostItemDescription()
+    {
+        return $this->belongsTo(LostItemDescription::class);
     }
 
     public function foundItems(){

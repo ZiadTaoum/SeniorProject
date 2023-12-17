@@ -10,7 +10,7 @@ class Reward extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['reward_description'];
+    protected $fillable = ['reward_id'];
 
     public function lostItems(){
         return $this->hasMany(LostItem::class);

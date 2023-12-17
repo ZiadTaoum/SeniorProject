@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('image_id'); 
             $table->unsignedBigInteger('address_id'); 
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('review_id');
+            $table->unsignedBigInteger('review_id')->nullable();;
             $table->unsignedBigInteger('reward_id');
             $table->timestamps();
 
