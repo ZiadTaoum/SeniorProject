@@ -26,10 +26,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::factory()->create([
+        $admin_role = Role::factory()->create([
             'name' => 'admin'
         ]);
-        Role::factory()->create([
+        $user_role = Role::factory()->create([
             'name' => 'user'
         ]);
         
@@ -62,7 +62,15 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
-            'is_admin' => true, // Assuming you have an 'is_admin' column in your users table
+            'role_id' => $admin_role->id
+        ]);
+
+
+        User::create([
+            'name' => 'user',
+            'email' => 'user@gmail.com',
+            'password' => Hash::make('password'),
+            'role_id' => $user_role->id
         ]);
     
     }

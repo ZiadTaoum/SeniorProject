@@ -22,16 +22,23 @@ class AuthController extends Controller
 
     public function loginPost(Request $request)
     {
-     $request->validate([
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email','password');
+        // $credentials = $request->only('email','password');
+        $credentials = [
+            'email' => $request->get('email'),
+            'password' => $request->get('password'),
+        ];
         if(Auth::attempt($credentials)){
-            return redirect()->intended(route('home'))->with('success', 'Login successful');
+            $user = User::where('email', $request->get('email'))->first();
+            Auth::login($user->id);
+            return redirect()->route('home');
+            // return redirect()->intended(route('home'))->with('success', 'Login successful');
         }
-        return redirect(route('home'))->with('error', 'Login details are not valid');
+        return redirect(route('/'))->with('error', 'Login details are not valid');
     }
 
     public function registrationPost(Request $request)

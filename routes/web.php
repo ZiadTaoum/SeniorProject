@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\AuthController;
@@ -26,11 +27,11 @@ use App\Http\Controllers\FounditemDescriptionController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::get('/', [AuthController::class, 'login'])->name('slash');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/report', [ReportController::class, 'index'])->name('report');
-Route::resource('reviews',ReviewController::class);
+Route::resource('/reviews',ReviewController::class);
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 // Route::get('/images', [ImageController::class, 'index']);
 
@@ -40,11 +41,11 @@ Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 // Route::post('/Logout',[UserController::class, 'logout']);
 // Route::post('/Login',[UserController::class, 'login']);
 
-Route::resource('founditem',FounditemController::class);
-Route::resource('founditemdescription',FounditemDescriptionController::class);
+Route::resource('/founditem',FounditemController::class);
+Route::resource('/founditemdescription',FounditemDescriptionController::class);
 
 
-Route::resource('lostitem',LostitemController::class);
+Route::resource('/lostitem',LostitemController::class);
 
 //routes for buttons in homepage
 Route::get('/search', [HomeController::class, 'search']);
@@ -54,7 +55,7 @@ Route::get('/leave-review', [HomeController::class, 'leaveReview']);
 
 
 
-Route::resource('items',AdminController::class);
+Route::resource('/items',AdminController::class);
 
 
 Route::get('/founditems', [AdminController::class, 'foundItems'])->name('foundItems');
@@ -73,16 +74,29 @@ Route::get('/reviews/create', [ReviewController::class, 'create'])->name('review
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('reviews', ReviewController::class)->except(['index', 'create', 'store']);
-    Route::get('reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+
+
+
+
+    Route::resource('/reviews', ReviewController::class)->except(['index', 'create', 'store']);
+    Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
 });
 
 
 Route::get('/login',[AuthController::class, 'login'])->name('login');
-Route::post('/login',[AuthController::class, 'loginPost'])->name('login.post');
+Route::post('/loginPost',[AuthController::class, 'loginPost'])->name('login.post');
 
-Route::get('/registration',[AuthController::class, 'registration'])->name('registration');
-Route::post('/registration',[AuthController::class, 'registrationPost'])->name('registration.post');
 
-Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
+Route::middleware(['isAdmin'])->group(function () {
+    Route::get('/registration',[AuthController::class, 'registration'])->name('registration');
+    Route::post('/registration',[AuthController::class, 'registrationPost'])->name('registration.post');
+});
 
+
+
+// Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
+
+
+// Auth::routes();
+
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
